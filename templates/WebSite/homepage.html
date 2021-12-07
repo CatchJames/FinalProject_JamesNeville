@@ -1,0 +1,73 @@
+{% extends "WebSite/base.html" %}
+{% load static %}
+
+{#Homepage to display reviews written by user who is currently active#}
+
+{% block title %}
+   <title>Home</title>
+{% endblock %}
+
+
+{% block css %}
+{% endblock %}
+
+
+{% block body %}
+
+
+     <div class="heading shadow-lg p-3 my-5 bg-body rounded">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-12 justify-content-center">
+                    <h1 class="text-center text-sm-start fw-bold text-dark text-opacity-75">Welcome, {{ user.username }}</h1>
+                    <p class="lead"></p>
+
+                </div>
+                <div class="col-md-4 col-12">
+                </div>
+            </div>
+        </div>
+    </div>
+
+         <div class="heading shadow-lg p-3 my-5 bg-body rounded">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 justify-content-center">
+                    <h1 class="text-center text-sm-start fw-bold text-dark text-opacity-75">Your reviews:</h1>
+                    <p class="lead"></p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    {% for i in reviews %}
+
+
+            <div class="section shadow-lg p-3 mb-5 bg-body rounded">
+                <div class="container p-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-12  order-1 justify-content-center">
+                            <h2 class="text-center text-sm-start ">Dune (2021)</h2>
+
+                            {{ i.rating }}
+                            {{ i.review }}
+                        </div>
+                        <div class="col-lg-6 col-12 order-lg-2">
+                            <img src="{% static 'images/dune.jpg' %}" class="img-fluid" id="review"  alt="Dune"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+
+{% endblock %}
+
+
+{% block js %}
+
+{% endblock %}
