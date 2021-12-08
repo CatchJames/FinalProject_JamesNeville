@@ -14,20 +14,19 @@
 
 
 {% block body %}
-<div class="heading shadow-lg p-3 my-5 bg-body rounded">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8 col-12 justify-content-center">
-                <h1 class="text-center text-sm-start fw-bold text-dark text-opacity-75">Welcome to MovReview!</h1>
-                <p class="lead">MovReview: Your personal library of movie reviews. Please
-                    <a href="{% url 'login' %}">log in</a> to start writing movie reviews.</p>
+    <div class="heading shadow-lg p-3 my-5 bg-body rounded">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-12 justify-content-center">
+                    <h1 class="text-center text-sm-start fw-bold text-dark text-opacity-75">Welcome to MovReview!</h1>
+                    <p class="lead">MovReview: Your personal library of movie reviews.</p>
 
-            </div>
-            <div class="col-md-4 col-12">
+                </div>
+                <div class="col-md-4 col-12">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
     <div class="row justify-content-center">
@@ -42,79 +41,16 @@
         </div>
     </div>
 
-
-
-
-
-
-
-    {% comment %}<div class="section shadow-lg p-3 mb-5 bg-body rounded">
-        <div class="container p-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-12  order-1 justify-content-center">
-                    <h2 class="text-center text-sm-start ">Dune (2021)</h2>
-                    <p class="lead">Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his
-                        understanding, must travel to the most dangerous planet in the universe to ensure the future of
-                        his family and his people. As malevolent forces explode into conflict over the planet's
-                        exclusive supply of the most precious resource in existence, only those who can conquer their
-                        own fear will survive.</p>
-                    <div class="row">
-                        <a role="button" class="btn btn-primary" href="{% url 'dune' %}">Read Reviews</a>
-
-                        <a role="button" class="btn btn-primary" href="{% url 'dune' %}">Write a review</a>
-                    </div>
-
-
-                </div>
-                <div class="col-lg-6 col-12 order-lg-2">
-                    <img src="{% static 'images/dune.jpg' %}" class="img-fluid" alt="Dune"/>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section shadow-lg p-3 mb-5 bg-body rounded">
-        <div class="container p-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-12  order-1 justify-content-center">
-                    <h2 class="text-center text-sm-start ">No Time To Die (2021)</h2>
-                    <p class="lead"></p>
-
-
-                </div>
-                <div class="col-lg-6 col-12 order-lg-2">
-                    <img src="{% static 'images/notimetodie.jpg' %}" class="img-fluid" alt="Dune"/>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section shadow-lg p-3 mb-5 bg-body rounded">
-        <div class="container p-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-12  order-1 justify-content-center">
-                    <h2 class="text-center text-sm-start ">The Green Knight (2021)</h2>
-                    <p class="lead"></p>
-
-
-                </div>
-                <div class="col-lg-6 col-12 order-lg-2">
-                    <img src="{% static 'images/thegreenknight.jpeg' %}" class="img-fluid" alt="Dune"/>
-                </div>
-            </div>
-        </div>
-    </div>{% endcomment %}
-
-
+    <form id="movie-form" action="{% url 'storeinfo' %}" method="post">
+    {% csrf_token %}
+        <input id="title" type="hidden" name="title">
+        <input id="image" type="hidden" name="image">
+        <input id="year" type="hidden" name="year">
+    </form>
 
 {% endblock %}
 
-
 {% block js %}
 
-    <script>
-
-    </script>
-    <script src="{% static 'js/movieAPI.js'  %}"></script>
-
+    <script src="{% static 'js/movieAPI.js' %}"></script>
 {% endblock %}

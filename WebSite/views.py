@@ -9,9 +9,11 @@ import requests
 
 
 @login_required(login_url='welcome')
-def homepage(request):
-    reviews = MovieReview.objects.filter(user=request.user)
-    context = {'reviews': reviews}
+def home(request):
+    #reviews = MovieReview.objects.filter(created_by=request.user)
+    reviews = MovieReview.objects.all()
+    data = MovieReview.objects.all()
+    context = {'data': data, 'reviews': reviews}
 
     return render(request, 'WebSite/homepage.html', context)
 
@@ -33,7 +35,7 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')
+            return redirect('explore')
 
     context = {'form': form}
     return render(request, 'WebSite/login.html', context)
@@ -54,23 +56,50 @@ def explore(request):
 
 
 @login_required(login_url='welcome')
-def review(request):
-    reviews = MovieReview.objects.all()
-    form = MovieReviewForm()
-    context = {'form': form, 'reviews': reviews}
-    return render(request, 'WebSite/review.html', context)
-
-
-def add_review(request):
-    form = MovieReviewForm(request.POST or None)
+def add_review(request, id):
+    last_record = MovieReview.objects.get(id=id)
+    form = MovieReviewForm(request.POST or None, instance=last_record)
     if request.method == 'POST':
         if form.is_valid():
             form.instance.user = request.user
             form.save()
-            return redirect('dune')
+            return redirect('home')
+    context = {"form": form, "record": last_record}
 
-    return render(request, 'WebSite/review.html')
+    return render(request, 'WebSite/review.html', context)
 
 
-def add_movie(request):
-    return render(request, 'WebSite/review.html')
+
+def storeinfo(request):
+    if request.method == 'POST':
+        title = request.POST.get("title")
+        image = request.POST.get("image")
+        year = request.POST.get("year")
+        print(title, image, year)
+        MovieReview.objects.create(title=title, poster=image, year=year)
+        last_record = MovieReview.objects.all().last()
+        return redirect('addreview', last_record.id)
+    else:
+        return redirect('home')
+
+
+def update_review(request, id):
+    review = MovieReview.objects.get(id=id)
+    form = MovieReviewForm(request.POST or None, instance=review)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    context = {'form': form}
+    return render(request, 'WebSite/update.html', context)
+
+
+def delete_review(request, id):
+    review = MovieReview.objects.get(id=id)
+    context = {'review': review}
+    if request.method == 'POST':
+        review.delete()
+        return redirect('home')
+
+    return render(request, 'Website/delete.html', context)

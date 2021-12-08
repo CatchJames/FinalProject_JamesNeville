@@ -19,7 +19,7 @@
                     <div class="col-lg-6 col-12  order-1 justify-content-center">
                         <h1>Write A Review!</h1>
 
-                        <form action="{% url 'addreview' %}" method="post">
+                        <form action="{% url 'addreview' record.id %}" method="post">
                             {% csrf_token %}
 
                             {{ form.as_p }}
@@ -28,7 +28,7 @@
 
                     </div>
                     <div class="col-lg-6 col-12 order-lg-2">
-                        <img src="{% static 'images/dune2.jpg' %}" class="img-fluid"  alt="Dune"/>
+                        <img src="{{record.poster}}" class="img-fluid"  alt="Dune"/>
                     </div>
                 </div>
             </div>

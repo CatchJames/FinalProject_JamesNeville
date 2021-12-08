@@ -50,14 +50,17 @@
                 <div class="container p-5">
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-12  order-1 justify-content-center">
-                            <h2 class="text-center text-sm-start ">Dune (2021)</h2>
-
-                            {{ i.rating }}
-                            {{ i.review }}
+                            <h2 class="text-center text-sm-start ">{{ data.title}}</h2>
+                            <p >Rating: {{ i.rating }}</p>
+                            <p >Review: {{ i.review }}</p>
                         </div>
                         <div class="col-lg-6 col-12 order-lg-2">
-                            <img src="{% static 'images/dune.jpg' %}" class="img-fluid" id="review"  alt="Dune"/>
+                            <img src="{{ data.poster }}" class="img-fluid" id="poster"  alt="poster"/>
                         </div>
+                        <div class="col-lg-6 col-12 text-lg-end text-start">
+{% comment %}                        <a role="button" class="btn btn-primary" href= "{% url 'updatereview' reviews.id %}">Update</a>
+                        <a role="button" class="btn btn-danger" href="{% url 'deletereview' reviews.id %}" >Delete</a>{% endcomment %}
+                    </div>
                     </div>
                 </div>
             </div>
