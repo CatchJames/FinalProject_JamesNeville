@@ -20,7 +20,7 @@ $(document).ready(function () {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
-                "x-rapidapi-key": "2079658137mshae024564d054edfp1f3b7fjsn61c720e98696"
+                "x-rapidapi-key": "#"
             },
             success: function (data) {
 
